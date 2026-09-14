@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASHRAF — Bio-Folio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --bg:#06080F;
+  --card:#0C1526;
+  --blue:#00CFFF;
+  --pink:#FF2B85;
+  --white:#FFFFFF;
+  --grey:#7AACCE;
+  --border:rgba(0,207,255,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Patrick Hand',cursive;overflow-x:hidden;}
+
+/* Dynamic Island */
+.island{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:1000;
+  background:rgba(5,7,14,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(0,207,255,.3);border-radius:60px;padding:11px 28px;
+  display:flex;align-items:center;gap:26px;
+  box-shadow:0 0 40px rgba(0,207,255,.18),0 0 80px rgba(255,43,133,.08),0 8px 40px rgba(0,0,0,.6);
+  transition:box-shadow .3s;white-space:nowrap;}
+.island:hover{box-shadow:0 0 60px rgba(0,207,255,.3),0 8px 50px rgba(0,0,0,.7);}
+.ibrand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;letter-spacing:3px;
+  background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.inav{display:flex;gap:22px;}
+.inav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);text-decoration:none;letter-spacing:.4px;transition:color .2s;}
+.inav a:hover{color:var(--blue);}
+.pdot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--pink));animation:pls 2s ease-in-out infinite;}
+@keyframes pls{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(0,207,255,.5);}50%{opacity:.8;transform:scale(1.2);box-shadow:0 0 0 8px rgba(0,207,255,0);}}
+@media(max-width:600px){.island{padding:9px 16px;gap:14px;}.inav{gap:12px;}.inav a{font-size:11px;}}
+
+/* Layout */
+.sec{padding:80px 24px;max-width:1100px;margin:0 auto;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,207,255,.25),rgba(255,43,133,.15),transparent);margin:0 24px;}
+.nline{width:52px;height:3px;border-radius:3px;margin-bottom:14px;background:linear-gradient(90deg,var(--blue),var(--pink),transparent);}
+.slbl{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;font-family:'Space Grotesk',sans-serif;}
+.stit{font-size:clamp(24px,4vw,38px);font-weight:700;color:var(--white);margin-bottom:34px;letter-spacing:-.4px;font-family:'Space Grotesk',sans-serif;}
+
+/* Glass card */
+.gc{background:rgba(0,207,255,.03);border:1px solid var(--border);border-radius:20px;backdrop-filter:blur(10px);transition:all .3s;}
+.gc:hover{border-color:rgba(0,207,255,.3);background:rgba(0,207,255,.06);box-shadow:0 0 24px rgba(0,207,255,.1);}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;padding:5px 14px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.4px;}
+.bb{background:rgba(0,207,255,.12);border:1px solid rgba(0,207,255,.38);color:#7ADEFF;}
+.bp{background:rgba(255,43,133,.12);border:1px solid rgba(255,43,133,.38);color:#FF7EB9;}
+.bg{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+
+/* Gradient text */
+.bg-text{background:linear-gradient(135deg,var(--blue) 0%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.blue-text{color:var(--blue);}
+.pink-text{color:var(--pink);}
+
+/* Hero */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 24px 80px;max-width:1100px;margin:0 auto;}
+.hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(72px,13vw,155px);font-weight:700;line-height:.9;letter-spacing:-5px;}
+.btn-p{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--blue),var(--pink));color:#fff;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;box-shadow:0 0 28px rgba(0,207,255,.3);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 42px rgba(0,207,255,.5);}
+.btn-g{display:inline-flex;align-items:center;background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.1);transition:all .2s;}
+.btn-g:hover{color:var(--white);border-color:rgba(0,207,255,.3);}
+
+/* Specs */
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;}
+@media(max-width:580px){.spec-grid{grid-template-columns:1fr;}}
+.slabel{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:6px;font-family:'Space Grotesk',sans-serif;}
+.sval{font-size:17px;font-weight:600;color:var(--white);}
+
+/* Hobby grid */
+.hg{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px;}
+.hcard{padding:26px 22px;}
+.hico{font-size:30px;margin-bottom:13px;display:block;}
+.htit{font-size:15px;font-weight:700;color:var(--white);margin-bottom:7px;font-family:'Space Grotesk',sans-serif;}
+.hbod{font-size:13px;color:var(--grey);line-height:1.6;}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;}
+.tag{font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(0,207,255,.07);border:1px solid rgba(0,207,255,.18);color:rgba(255,255,255,.6);}
+
+/* Vibe */
+.vg{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:580px){.vg{grid-template-columns:1fr;}}
+.vgood{border-color:rgba(0,207,255,.3)!important;}
+.vbad{border-color:rgba(255,43,133,.3)!important;}
+.vgood:hover{border-color:rgba(0,207,255,.5)!important;box-shadow:0 0 24px rgba(0,207,255,.1)!important;}
+.vbad:hover{border-color:rgba(255,43,133,.5)!important;box-shadow:0 0 24px rgba(255,43,133,.1)!important;}
+.vhead{display:flex;align-items:center;gap:9px;margin-bottom:17px;}
+.dotb{width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px rgba(0,207,255,.6);}
+.dotp{width:9px;height:9px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px rgba(255,43,133,.6);}
+.vlbl{font-size:15px;font-weight:700;font-family:'Space Grotesk',sans-serif;}
+.vul{list-style:none;}
+.vul li{padding:9px 0;font-size:13.5px;color:rgba(255,255,255,.75);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:9px;}
+.vul li:last-child{border:none;}
+
+/* Music */
+.mplayer{background:rgba(6,8,20,.92);border:1px solid rgba(0,207,255,.2);border-radius:24px;padding:28px;backdrop-filter:blur(20px);position:relative;overflow:hidden;}
+.mplayer::before{content:'';position:absolute;top:-50%;left:-15%;width:55%;height:210%;background:radial-gradient(ellipse,rgba(0,207,255,.05) 0%,transparent 70%);pointer-events:none;}
+.eq{display:flex;align-items:flex-end;gap:3px;height:24px;}
+.eqb{width:3px;border-radius:2px;background:linear-gradient(to top,var(--blue),var(--pink));animation:eqa .8s ease-in-out infinite;}
+.eqb:nth-child(1){animation-delay:0s;height:8px;}.eqb:nth-child(2){animation-delay:.1s;height:17px;}.eqb:nth-child(3){animation-delay:.2s;height:12px;}.eqb:nth-child(4){animation-delay:.3s;height:22px;}.eqb:nth-child(5){animation-delay:.4s;height:10px;}.eqb:nth-child(6){animation-delay:.15s;height:19px;}.eqb:nth-child(7){animation-delay:.25s;height:14px;}.eqb:nth-child(8){animation-delay:.35s;height:6px;}
+@keyframes eqa{0%,100%{transform:scaleY(.3);opacity:.5;}50%{transform:scaleY(1);opacity:1;}}
+.mqw{overflow:hidden;white-space:nowrap;border-top:1px solid rgba(0,207,255,.08);border-bottom:1px solid rgba(0,207,255,.08);padding:10px 0;margin:17px 0;}
+.mqt{display:inline-block;font-size:13px;color:var(--grey);animation:mq 22s linear infinite;}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.achip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:100px;background:rgba(0,207,255,.05);border:1px solid rgba(0,207,255,.1);font-size:13px;color:rgba(255,255,255,.75);white-space:nowrap;cursor:pointer;transition:all .2s;}
+.achip:hover{background:rgba(0,207,255,.12);border-color:rgba(0,207,255,.35);color:var(--white);}
+.achip.on{background:rgba(0,207,255,.15);border-color:rgba(0,207,255,.5);color:var(--blue);}
+
+/* Gallery */
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
+@media(max-width:580px){.gg{grid-template-columns:repeat(2,1fr);}}
+.gi{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:9/14;cursor:pointer;border:1px solid rgba(0,207,255,.1);}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+.gi:hover img{transform:scale(1.08);}
+.gov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,80,140,.7) 0%,rgba(255,43,133,.25) 50%,transparent 80%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:13px;}
+.gi:hover .gov{opacity:1;}
+.gcap{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#fff;}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(24px);}
+.lb.on{opacity:1;pointer-events:all;}
+#lbimg{max-width:88vw;max-height:88vh;object-fit:contain;border-radius:16px;box-shadow:0 0 60px rgba(0,207,255,.3);}
+.lbcl{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#fff;transition:all .2s;}
+.lbcl:hover{background:rgba(0,207,255,.25);border-color:var(--blue);}
+.lbnav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:22px;transition:all .2s;}
+.lbnav:hover{background:rgba(0,207,255,.2);border-color:var(--blue);}
+#lbprev{left:20px;}#lbnext{right:20px;}
+
+/* Contact */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px;}
+.ccard{padding:22px 24px;display:flex;align-items:center;gap:16px;text-decoration:none;transition:all .3s;}
+.ccard:hover{transform:translateY(-3px);}
+.cico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ico-b{background:rgba(0,207,255,.15);border:1px solid rgba(0,207,255,.3);box-shadow:0 0 16px rgba(0,207,255,.2);}
+.ico-p{background:rgba(255,43,133,.15);border:1px solid rgba(255,43,133,.3);box-shadow:0 0 16px rgba(255,43,133,.2);}
+.ctit{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:4px;font-family:'Space Grotesk',sans-serif;font-weight:600;}
+.cval{font-size:14px;color:var(--white);word-break:break-all;}
+
+/* Timeline */
+.tlg{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:580px){.tlg{grid-template-columns:1fr;}}
+.tlyr{font-size:50px;font-weight:700;line-height:1;font-family:'Space Grotesk',sans-serif;}
+.pbar{height:3px;background:rgba(255,255,255,.08);border-radius:3px;margin-top:18px;overflow:hidden;}
+.pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--pink));width:0;transition:width 1.2s ease-out;}
+
+/* Scroll fade */
+.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;}
+.fu.vis{opacity:1;transform:translateY(0);}
+
+/* Ambient */
+.amb{position:absolute;border-radius:50%;filter:blur(1px);animation:flt 7s ease-in-out infinite;}
+@keyframes flt{0%,100%{transform:translateY(0) scale(1);opacity:.4;}50%{transform:translateY(-14px) scale(1.2);opacity:.75;}}
+</style>
+</head>
+<body>
+
+<!-- Dynamic Island -->
+<nav class="island">
+  <span class="ibrand">ASHRAF</span>
+  <div class="pdot"></div>
+  <div class="inav">
+    <a href="#about">About</a>
+    <a href="#specs">Specs</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#vibe">Vibe</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div style="position:relative">
+    <div class="amb" style="width:5px;height:5px;top:10px;right:90px;background:var(--blue);animation-delay:0s"></div>
+    <div class="amb" style="width:3px;height:3px;top:80px;right:220px;background:var(--pink);animation-delay:2.5s"></div>
+    <div class="amb" style="width:4px;height:4px;top:40px;right:50px;background:var(--blue);animation-delay:4s"></div>
+    <p class="slbl" style="margin-bottom:18px">✦ BIO-FOLIO ✦ 2026</p>
+    <h1 class="hero-name bg-text">ASHRAF</h1>
+    <p style="font-size:clamp(14px,2vw,17px);color:rgba(255,255,255,.5);margin-top:22px;max-width:460px;line-height:1.7">
+      The Instant Spec Sheet — everything you need to know.<br>Skip the small talk.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:32px">
+      <span class="badge bb">18 yrs old</span>
+      <span class="badge bg">💻 Web Developer</span>
+      <span class="badge bg">✍️ Author · "28"</span>
+      <span class="badge bp">🌈 Homosexual</span>
+      <span class="badge bg">🇫🇷 French Speaker</span>
+      <span class="badge bb">📍 Nairobi, KE</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:44px">
+      <a href="#about" class="btn-p">Read My Specs →</a>
+      <a href="#gallery" class="btn-g">View Photos</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Personal Specs -->
+<section class="sec fu" id="about">
+  <div class="nline"></div>
+  <p class="slbl">Personal Specs</p>
+  <h2 class="stit">Everything on the table</h2>
+  <div class="spec-grid">
+    <div class="gc" style="padding:22px 24px">
+      <div class="slabel">Full Name</div>
+      <div class="sval">Ashraf Abdalla</div>
+    </div>
+    <div class="gc" style="padding:22px 24px">
+      <div class="slabel">Date of Birth</div>
+      <div class="sval">December 27, 2007</div>
+    </div>
+    <div class="gc" style="padding:22px 24px">
+      <div class="slabel">Sexual Orientation</div>
+      <div class="sval pink-text">Homosexual 🌈</div>
+    </div>
+    <div class="gc" style="padding:22px 24px">
+      <div class="slabel">Relationship Role</div>
+      <div class="sval">Bottom ♡</div>
+    </div>
+    <div class="gc" style="padding:24px 28px;grid-column:1/-1">
+      <div class="slabel">What I'm Looking For</div>
+      <div style="font-size:15px;color:rgba(255,255,255,.85);line-height:1.7;margin-top:6px">Genuine connections, clear communication, mutual respect, and authentic vibes. No games. No grey areas.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Deep Dive -->
+<section class="sec fu" id="specs">
+  <div class="nline"></div>
+  <p class="slbl">The Deep Dive</p>
+  <h2 class="stit">What I'm made of</h2>
+  <div class="hg">
+    <div class="gc hcard">
+      <span class="hico">💻</span>
+      <div class="htit">Tech & Development</div>
+      <p class="hbod">Building digital experiences from the ground up. Founder of TriBridge Services.</p>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Python</span><span class="tag">French Translation</span></div>
+    </div>
+    <div class="gc hcard">
+      <span class="hico">✍️</span>
+      <div class="htit">Creative Writing</div>
+      <p class="hbod">Authoring manuscript "28" — a deeply personal creative work in active development.</p>
+      <div class="tags"><span class="tag">Manuscript "28"</span><span class="tag">Storytelling</span></div>
+    </div>
+    <div class="gc hcard">
+      <span class="hico">🎵</span>
+      <div class="htit">Music Rotation</div>
+      <p class="hbod">Curated taste — melancholic indie to raw pop. Music is a full-time experience.</p>
+      <div class="tags"><span class="tag">Lana Del Rey</span><span class="tag">Alex Warren</span><span class="tag">Taylor Swift</span><span class="tag">Tate McRae</span></div>
+    </div>
+    <div class="gc hcard">
+      <span class="hico">🍳</span>
+      <div class="htit">Culinary & Style</div>
+      <p class="hbod">Vintage fashion enthusiast. Cooking is art — aromatic spices, apple juice on the side 🧃</p>
+      <div class="tags"><span class="tag">Cooking</span><span class="tag">Vintage Fashion</span><span class="tag">Apple Juice</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Vibe Check -->
+<section class="sec fu" id="vibe">
+  <div class="nline"></div>
+  <p class="slbl">Compatibility Check</p>
+  <h2 class="stit">Vibe Check ✓</h2>
+  <div class="vg">
+    <div class="gc vgood" style="padding:26px">
+      <div class="vhead"><div class="dotb"></div><span class="vlbl blue-text">The Good Stuff</span></div>
+      <ul class="vul">
+        <li><span>🐕</span> Dogs — absolute weakness</li>
+        <li><span>👟</span> Vintage sneakers & rugged denim</li>
+        <li><span>🚗</span> Mercedes-Benz E63 / C63s AMG</li>
+        <li><span>📱</span> Modern tech & innovation</li>
+        <li><span>🎧</span> Music — always, everywhere</li>
+        <li><span>🍳</span> Good food & kitchen energy</li>
+        <li><span>🌿</span> Calm, grounded people</li>
+      </ul>
+    </div>
+    <div class="gc vbad" style="padding:26px">
+      <div class="vhead"><div class="dotp"></div><span class="vlbl pink-text">Hard Passes</span></div>
+      <ul class="vul">
+        <li><span>🏊</span> Swimming & deep water — no.</li>
+        <li><span>🪂</span> Heights — absolutely not.</li>
+        <li><span>🐍</span> Snakes — immediate exit.</li>
+        <li><span>🐸</span> Frogs — same energy.</li>
+        <li><span>🦎</span> Chameleons — unsettling.</li>
+        <li><span>🍌</span> Bananas — the fruit exception.</li>
+        <li><span>😐</span> Unclear intentions & mind games.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Music Player -->
+<section class="sec fu">
+  <div class="nline"></div>
+  <p class="slbl">Now Playing</p>
+  <h2 class="stit">Daily Rotation 🎵</h2>
+  <div class="mplayer">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:4px">
+      <div style="display:flex;align-items:center;gap:15px">
+        <div style="width:52px;height:52px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--pink));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 22px rgba(0,207,255,.35);flex-shrink:0">🎵</div>
+        <div>
+          <div id="cartist" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px">Lana Del Rey</div>
+          <div style="font-size:12px;color:var(--grey)">Ashraf's Curated Picks</div>
+        </div>
+      </div>
+      <div class="eq"><div class="eqb"></div><div class="eqb"></div><div class="eqb"></div><div class="eqb"></div><div class="eqb"></div><div class="eqb"></div><div class="eqb"></div><div class="eqb"></div></div>
+    </div>
+    <div class="mqw"><span class="mqt">♪ Lana Del Rey ✦ Dominic Fike ✦ Alex Warren ✦ Taylor Swift ✦ Tate McRae ✦ Adele ✦ Dean Lewis ✦ Lewis Capaldi ✦ Wiz the Mic ✦ Justin Bieber ✦        ♪ Lana Del Rey ✦ Dominic Fike ✦ Alex Warren ✦ Taylor Swift ✦ Tate McRae ✦ Adele ✦ Dean Lewis ✦ Lewis Capaldi ✦ Wiz the Mic ✦ Justin Bieber ✦</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <div class="achip on" onclick="pick(this,'Lana Del Rey')">🎤 Lana Del Rey</div>
+      <div class="achip" onclick="pick(this,'Dominic Fike')">🎸 Dominic Fike</div>
+      <div class="achip" onclick="pick(this,'Alex Warren')">🎙 Alex Warren</div>
+      <div class="achip" onclick="pick(this,'Taylor Swift')">✨ Taylor Swift</div>
+      <div class="achip" onclick="pick(this,'Tate McRae')">💫 Tate McRae</div>
+      <div class="achip" onclick="pick(this,'Adele')">🎶 Adele</div>
+      <div class="achip" onclick="pick(this,'Dean Lewis')">🌊 Dean Lewis</div>
+      <div class="achip" onclick="pick(this,'Lewis Capaldi')">❤️‍🔥 Lewis Capaldi</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Gallery -->
+<section class="sec fu" id="gallery">
+  <div class="nline"></div>
+  <p class="slbl">Local Album</p>
+  <h2 class="stit">Visual Archive 📸</h2>
+  <div class="gg">
+    <div class="gi" onclick="openLb(0)">
+      <img src="photos/photo_01.jpg" alt="Out & About">
+      <div class="gov"><span class="gcap">OUT &amp; ABOUT</span></div>
+    </div>
+    <div class="gi" onclick="openLb(1)">
+      <img src="photos/photo_02.jpg" alt="Cargo Docks">
+      <div class="gov"><span class="gcap">CARGO DOCKS</span></div>
+    </div>
+    <div class="gi" onclick="openLb(2)">
+      <img src="photos/photo_03.jpg" alt="Street Style">
+      <div class="gov"><span class="gcap">STREET STYLE</span></div>
+    </div>
+    <div class="gi" onclick="openLb(3)">
+      <img src="photos/photo_04.jpg" alt="Red Hour">
+      <div class="gov"><span class="gcap">RED HOUR</span></div>
+    </div>
+    <div class="gi" onclick="openLb(4)">
+      <img src="photos/photo_05.jpg" alt="Mirror Mode">
+      <div class="gov"><span class="gcap">MIRROR MODE</span></div>
+    </div>
+    <div class="gi" onclick="openLb(5)">
+      <img src="photos/photo_06.jpg" alt="Neon Nights">
+      <div class="gov"><span class="gcap">NEON NIGHTS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lb" id="lightbox" onclick="if(event.target===this)closeLb()">
+  <div class="lbcl" onclick="closeLb()">✕</div>
+  <div class="lbnav" id="lbprev" onclick="lbNav(-1)">‹</div>
+  <img id="lbimg" src="" alt="">
+  <div class="lbnav" id="lbnext" onclick="lbNav(1)">›</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Contact -->
+<section class="sec fu" id="contact">
+  <div class="nline"></div>
+  <p class="slbl">Reach Out</p>
+  <h2 class="stit">Get In Touch 💬</h2>
+  <div class="cgrid">
+    <a href="mailto:ashrafabdalla2o7@gmail.com" class="gc ccard">
+      <div class="cico ico-b">✉️</div>
+      <div><div class="ctit">Casual / Personal</div><div class="cval">ashrafabdalla2o7@gmail.com</div></div>
+    </a>
+    <a href="mailto:servicestribridge@gmail.com" class="gc ccard">
+      <div class="cico ico-p">💼</div>
+      <div><div class="ctit">Business · TriBridge</div><div class="cval">servicestribridge@gmail.com</div></div>
+    </a>
+    <a href="https://instagram.com/al._.ashraf" target="_blank" rel="noopener" class="gc ccard">
+      <div class="cico ico-b">📸</div>
+      <div><div class="ctit">Instagram</div><div class="cval">@al._.ashraf</div></div>
+    </a>
+    <a href="https://wa.me/254785117163" target="_blank" rel="noopener" class="gc ccard">
+      <div class="cico ico-p">💬</div>
+      <div><div class="ctit">WhatsApp</div><div class="cval">+254 785 117 163</div></div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Timeline -->
+<section class="sec fu">
+  <div class="nline"></div>
+  <p class="slbl">Timeline & Projects</p>
+  <h2 class="stit">Active Milestones</h2>
+  <div class="tlg">
+    <div class="gc" style="padding:30px;border-color:rgba(255,43,133,.2)">
+      <div style="margin-bottom:14px"><span class="badge bp">Writing & Drafting</span></div>
+      <div class="tlyr bg-text">"28"</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-top:4px">Novel / Manuscript</div>
+      <p style="font-size:13px;color:var(--grey);margin-top:10px;line-height:1.7">A deeply personal creative work in active development — raw, real, and still being written.</p>
+      <div class="pbar"><div class="pfill" data-w="65%"></div></div>
+      <div style="display:flex;justify-content:space-between;margin-top:7px;font-size:11px;color:var(--grey)"><span>In Progress</span><span>65%</span></div>
+    </div>
+    <div class="gc" style="padding:30px;border-color:rgba(0,207,255,.2)">
+      <div style="margin-bottom:14px"><span class="badge bb">Class of 2025</span></div>
+      <div class="tlyr blue-text">2025</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-top:4px">Njoro Boys High School</div>
+      <p style="font-size:13px;color:var(--grey);margin-top:10px;line-height:1.7">KCSE Class of 2025. Mean Grade <strong style="color:var(--white)">C+</strong> — English B+, Chemistry B-. Next chapter: BSc Nursing.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:14px">
+        <span class="badge bg" style="font-size:11px">English B+</span>
+        <span class="badge bg" style="font-size:11px">Chemistry B-</span>
+        <span class="badge bg" style="font-size:11px">French B-</span>
+        <span class="badge bb" style="font-size:11px">C+ Overall</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="text-align:center;padding:44px 24px;color:rgba(255,255,255,.3);font-size:13px;border-top:1px solid rgba(0,207,255,.08)">
+  <div class="bg-text" style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:2px">ASHRAF</div>
+  <p style="margin-bottom:4px">Nairobi, Kenya ✦ Founder · TriBridge Services</p>
+  <p style="color:rgba(255,255,255,.15)">Bio-Folio · Built with intention · 2026</p>
+</footer>
+
+<script>
+  // Scroll fade
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), {threshold:.1});
+  document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+
+  // Progress bars
+  const po = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.style.width = e.target.dataset.w; }), {threshold:.5});
+  document.querySelectorAll('.pfill').forEach(b => po.observe(b));
+
+  // Music picker
+  function pick(el, name) {
+    document.querySelectorAll('.achip').forEach(c => c.classList.remove('on'));
+    el.classList.add('on');
+    document.getElementById('cartist').textContent = name;
+  }
+
+  // Lightbox — paths match the photos/ folder sitting next to this HTML file
+  const photos = [
+    'photos/photo_01.jpg',
+    'photos/photo_02.jpg',
+    'photos/photo_03.jpg',
+    'photos/photo_04.jpg',
+    'photos/photo_05.jpg',
+    'photos/photo_06.jpg'
+  ];
+  let cur = 0;
+  function openLb(i) { cur = i; document.getElementById('lbimg').src = photos[i]; document.getElementById('lightbox').classList.add('on'); document.body.style.overflow = 'hidden'; }
+  function closeLb() { document.getElementById('lightbox').classList.remove('on'); document.body.style.overflow = ''; }
+  function lbNav(d) { cur = (cur + d + photos.length) % photos.length; document.getElementById('lbimg').src = photos[cur]; }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLb();
+    if (e.key === 'ArrowLeft') lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+  });
+</script>
+</body>
+</html>
